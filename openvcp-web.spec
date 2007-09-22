@@ -8,7 +8,8 @@ Source0:	http://files.openvcp.org/%{name}-%{version}.tar.gz
 # Source0-md5:	2d9733679fbb0b3a5f1b028d551043a1
 URL:		http://www.openvcp.org/
 BuildRequires:	rpmbuild(macros) >= 1.268
-Requires:	php >= 3:5.0.0
+Requires(triggerpostun):	sed >= 4.0
+Requires:	php-common >= 3:5.0.0
 Requires:	php-gd
 Requires:	php-gettext
 Requires:	php-gnutls
@@ -18,7 +19,6 @@ Requires:	webapps
 Requires:	webserver(access)
 Requires:	webserver(alias)
 Requires:	webserver(auth)
-Requires(triggerpostun):	sed >= 4.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

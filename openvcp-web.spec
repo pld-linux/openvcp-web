@@ -6,6 +6,7 @@ License:	GPL
 Group:		Applications/WWW
 Source0:	http://files.openvcp.org/%{name}-%{version}.tar.gz
 # Source0-md5:	2d9733679fbb0b3a5f1b028d551043a1
+Source1:	%{name}-apache.conf
 URL:		http://www.openvcp.org/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
@@ -33,23 +34,6 @@ VServer Control Panel Web interface.
 %prep
 %setup -q -n %{name}-%{version}-rc2
 
-cat > httpd.conf <<'EOF'
-Alias /%{name} %{_appdir}
-<Directory %{_appdir}>
-	RewriteEngine On
-	RewriteRule ^openvcp(.*)$ index.php$1
-
-	Order Deny,Allow
-	Deny from all
-	Allow from localhost
-</Directory>
-
-<Directory %{_appdir}/core>
-	Order Deny,Allow
-	Deny from all
-</Directory>
-EOF
-
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_appdir},/var/cache/openvcp-web}
@@ -63,7 +47,8 @@ rm -rf $RPM_BUILD_ROOT%{_appdir}/core/{cache,.htaccess,mysql.sql,openvcp.conf}
 ln -sf /var/cache/openvcp-web $RPM_BUILD_ROOT%{_appdir}/core/cache
 ln -sf %{_sysconfdir}/openvcp.conf $RPM_BUILD_ROOT%{_appdir}/core/openvcp.conf
 
-install httpd.conf $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -90,9 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS INSTALL README core/mysql.sql
 %dir %attr(750,root,http) %{_sysconfdir}
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/apache.conf
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
-#%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/lighttpd.conf
-%attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*
+%attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/openvcp.conf
 %{_appdir}
 %dir %attr(770,httpd,httpd) /var/cache/openvcp-web

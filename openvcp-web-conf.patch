@@ -1,0 +1,21 @@
+diff -ur openvcp-web-0.3-rc2/core/openvcp.conf openvcp-web/core/openvcp.conf
+--- openvcp-web-0.3-rc2/core/openvcp.conf	2007-09-04 21:19:50.000000000 +0200
++++ openvcp-web/core/openvcp.conf	2007-09-24 00:17:30.000000000 +0200
+@@ -36,7 +36,7 @@
+ 	# Webpath to OpenVCP
+ 	# Empty if OpenVCP index.php is in document root
+ 	# else /directory_name without trailing /
+-	webPath /ovcp_webinterface
++	webPath /openvcp
+ 	
+ 	# Support Mail Addy
+ 	# this will also be used for auto sending mails
+@@ -62,7 +62,7 @@
+ 	db openvcp
+ 	
+ 	# Database user
+-	user root
++	user openvcp
+ 	
+ 	# Database passwort
+ 	passwd 

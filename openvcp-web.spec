@@ -15,7 +15,7 @@ Requires:	php-gd
 Requires:	php-gettext
 Requires:	php-gnutls
 Requires:	php-mysql
-Requires:	php-socket
+Requires:	php-sockets
 Requires:	webapps
 Requires:	webserver(access)
 Requires:	webserver(alias)

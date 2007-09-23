@@ -1,12 +1,14 @@
 Summary:	VServer Control Panel Web interface
 Name:		openvcp-web
 Version:	0.3
-Release:	0.1
+Release:	0.3
 License:	GPL
 Group:		Applications/WWW
 Source0:	http://files.openvcp.org/%{name}-%{version}.tar.gz
 # Source0-md5:	2d9733679fbb0b3a5f1b028d551043a1
 Source1:	%{name}-apache.conf
+Patch0:		%{name}-conf.patch
+Patch1:		%{name}-actions.patch
 URL:		http://www.openvcp.org/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(triggerpostun):	sed >= 4.0
@@ -33,6 +35,8 @@ VServer Control Panel Web interface.
 
 %prep
 %setup -q -n %{name}-%{version}-rc2
+%patch0 -p1
+%patch1 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT

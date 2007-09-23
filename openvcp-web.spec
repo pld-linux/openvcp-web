@@ -79,4 +79,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/httpd.conf
 %attr(640,root,http) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/openvcp.conf
 %{_appdir}
-%dir %attr(770,httpd,httpd) /var/cache/openvcp-web
+%dir %attr(770,http,http) /var/cache/openvcp-web

@@ -1,0 +1,42 @@
+diff -ur openvcp-web-0.3-rc2/core/GUI.php openvcp-web/core/GUI.php
+--- openvcp-web-0.3-rc2/core/GUI.php	2007-09-04 21:08:07.000000000 +0200
++++ openvcp-web/core/GUI.php	2007-09-23 21:48:53.000000000 +0200
+@@ -177,7 +177,7 @@
+ 				else
+ 				$info = array();
+ 				$homeDir = OpenVCP::makeURL(str_replace('\\', '/', str_replace(OPENVCP_MODS_DIR . (OPENVCP_MODS_DIR == dirname(dirname(OpenVCP::calledMod())) ? "" : DIRECTORY_SEPARATOR), '', dirname(dirname(OpenVCP::calledMod())))));
+-				preg_match("/openvcp\/(.*)/i", $homeDir, $subpattern);
++				preg_match("/actions\/(.*)/i", $homeDir, $subpattern);
+ 				if($subpattern[1] == "")
+ 				{
+ 					if($auth->user_information['is_admin'])
+@@ -539,7 +539,7 @@
+ 		else
+ 		{
+ 			preg_match("/[a-z]+.php/is", str_replace('\\', '/', str_replace(OPENVCP_MODS_DIR . DIRECTORY_SEPARATOR, '', OpenVCP::calledMod())), $subpattern);
+-			$this->contentData = str_replace("{eId" . $element . "}", "<img src=" . OpenVCP::getWebPath() . DIRECTORY_SEPARATOR . "openvcp" . DIRECTORY_SEPARATOR . str_replace("/".$subpattern[0], '', str_replace('\\', '/', str_replace(OPENVCP_MODS_DIR . DIRECTORY_SEPARATOR, '', OpenVCP::calledMod())))."/graph/" . $name . ">{eId" . $element . "}", $this->contentData);
++			$this->contentData = str_replace("{eId" . $element . "}", "<img src=" . OpenVCP::getWebPath() . DIRECTORY_SEPARATOR . "actions" . DIRECTORY_SEPARATOR . str_replace("/".$subpattern[0], '', str_replace('\\', '/', str_replace(OPENVCP_MODS_DIR . DIRECTORY_SEPARATOR, '', OpenVCP::calledMod())))."/graph/" . $name . ">{eId" . $element . "}", $this->contentData);
+ 		}
+ 	}
+ 
+diff -ur openvcp-web-0.3-rc2/core/OpenVCP.php openvcp-web/core/OpenVCP.php
+--- openvcp-web-0.3-rc2/core/OpenVCP.php	2007-09-04 21:08:07.000000000 +0200
++++ openvcp-web/core/OpenVCP.php	2007-09-23 21:51:09.000000000 +0200
+@@ -176,7 +176,7 @@
+ 			bindtextdomain('core', $mainConfig['localeDir']);
+ 			bind_textdomain_codeset('core', 'iso-8859-15');
+ 			register_shutdown_function(array(OpenVCP, 'shutdown'));
+-			$call    = preg_replace('/\//', DIRECTORY_SEPARATOR, preg_replace('/^.*?(openvcp\/|index\.php\/)\/?(.*)$/', '\\2', $_SERVER['REQUEST_URI']));
++			$call    = preg_replace('/\//', DIRECTORY_SEPARATOR, preg_replace('/^.*?(actions\/|index\.php\/)\/?(.*)$/', '\\2', $_SERVER['REQUEST_URI']));
+ 			$call 	 = str_replace('index.php', '', $call);
+ 			$callTmp = $call;
+ 			if($call !== "")
+@@ -302,7 +302,7 @@
+ 	 * @return string
+ 	 */
+ 	public static function makeURL($relURL){
+-		return self::$webPath . "/openvcp/$relURL";
++		return self::$webPath . "/actions/$relURL";
+ 	}
+ 	
+ 	/**

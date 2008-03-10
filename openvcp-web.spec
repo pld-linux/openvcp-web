@@ -1,4 +1,5 @@
 Summary:	VServer Control Panel Web interface
+Summary(pl.UTF-8):	VServer Control Panel  - interfejs WWW do administrowania VServerami
 Name:		openvcp-web
 Version:	0.3
 Release:	0.4
@@ -32,6 +33,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 VServer Control Panel Web interface.
+
+%description -l pl.UTF-8
+VServer Control Panel  - interfejs WWW do administrowania VServerami.
 
 %prep
 %setup -q -n %{name}-%{version}-rc2

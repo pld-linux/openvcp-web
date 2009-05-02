@@ -1,12 +1,13 @@
+%define		rc_ver	rc2
 Summary:	VServer Control Panel Web interface
 Summary(pl.UTF-8):	VServer Control Panel  - interfejs WWW do administrowania VServerami
 Name:		openvcp-web
-Version:	0.3
-Release:	0.4
+Version:	0.4
+Release:	0.%{rc_ver}.1
 License:	GPL
 Group:		Applications/WWW
-Source0:	http://files.openvcp.org/%{name}-%{version}.tar.gz
-# Source0-md5:	2d9733679fbb0b3a5f1b028d551043a1
+Source0:	http://files.openvcp.org/%{name}-%{version}%{rc_ver}.tar.gz
+# Source0-md5:	d82def427ffffffe87459c0972daa5a0
 Source1:	%{name}-apache.conf
 Patch0:		%{name}-conf.patch
 Patch1:		%{name}-actions.patch
@@ -38,9 +39,9 @@ VServer Control Panel Web interface.
 VServer Control Panel  - interfejs WWW do administrowania VServerami.
 
 %prep
-%setup -q -n %{name}-%{version}-rc2
+%setup -q -n %{name}-%{version}%{rc_ver}
 %patch0 -p1
-%patch1 -p1
+#%patch1 -p1
 
 # Replace short open tag <? with full <?php
 find -type f -print0 | xargs -0 perl -pi -e 's/<\?($|\s)/<?php\1/g'

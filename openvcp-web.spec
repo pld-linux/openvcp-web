@@ -41,7 +41,7 @@ VServer Control Panel  - interfejs WWW do administrowania VServerami.
 %prep
 %setup -q -n %{name}-%{version}%{rc_ver}
 %patch -P0 -p1
-#%patch1 -p1
+#%%patch1 -p1
 
 # Replace short open tag <? with full <?php
 find -type f -print0 | xargs -0 perl -pi -e 's/<\?($|\s)/<?php\1/g'
